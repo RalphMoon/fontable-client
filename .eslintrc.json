@@ -8,7 +8,6 @@
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
-    "plugin:import/recommended",
     "plugin:jsx-a11y/recommended",
     "prettier"
   ],
@@ -21,23 +20,25 @@
     }
   },
   "settings": { "react": { "version": "18.2" } },
-  "plugins": ["react-refresh"],
+  "plugins": ["react-refresh", "@emotion", "@tanstack/query"],
   "rules": {
     "no-console": "warn",
+    "no-unused-expressions": "off",
     "no-inline-comments": "error",
-    "array-bracket-spacing": ["error", "always"],
+    "array-bracket-spacing": ["error", "always", { "singleValue": false }],
     "react-refresh/only-export-components": [
       "warn",
       { "allowConstantExport": true }
     ],
     "func-names": "off",
     "consistent-return": "warn",
+    "no-useless-catch": "off",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "warn",
     "react/style-prop-object": "warn",
     "react/jsx-props-no-spreading": "off",
+    "react/jsx-no-bind": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "import/no-anonymous-default-export": "warn",
-    "import/no-extraneous-dependencies": "warn",
-    "import/extensions": ["error", "always", { "ignorePackages": true }],
     "react/no-unknown-property": "off",
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "off",
