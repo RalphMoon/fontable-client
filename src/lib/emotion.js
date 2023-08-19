@@ -10,7 +10,7 @@ export const global = css`
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: auto;
+    overflow: hidden;
   }
 
   body {
@@ -22,5 +22,16 @@ export const global = css`
 export const theme = {
   colors: {
     blue: "#1877F2",
+    lightgrey: "rgba(85, 85, 85, 0.33)",
+  },
+  shadows: {
+    frame:
+      "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+  },
+  glyph: {
+    box: {
+      width: "400px",
+      height: "800px",
+    },
   },
 };
