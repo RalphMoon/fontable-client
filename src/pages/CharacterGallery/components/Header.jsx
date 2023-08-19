@@ -1,14 +1,8 @@
 import styled from "@emotion/styled";
-import useProjectMutation from "../../../features/drawing/hooks/useProjectMutation";
 
 function Header({ onMenuClick }) {
-  const { mutate } = useProjectMutation();
-
   return (
     <header css={{ padding: "10px 0", borderBottom: "1px solid #eceff1" }}>
-      <button type="button" onClick={() => mutate()}>
-        SEND
-      </button>
       <menu
         css={{
           display: "flex",
