@@ -2,26 +2,23 @@ import styled from "@emotion/styled";
 
 function Frame({ unicode, onFrameClick, children }) {
   return (
-    <div
-      role="button"
-      aria-hidden="true"
-      css={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-      }}
-      onClick={onFrameClick}
-    >
-      <StyledDiv>{children}</StyledDiv>
+    <Wrapper role="button" aria-hidden="true" onClick={onFrameClick}>
+      <StyledFrame>{children}</StyledFrame>
       <h4 css={{ marginTop: "5px", cursor: "pointer" }}>
         {String.fromCharCode(unicode)}
       </h4>
-    </div>
+    </Wrapper>
   );
 }
 
-const StyledDiv = styled.div`
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  text-align: center;
+`;
+
+const StyledFrame = styled.div`
   width: 7vw;
   height: 13vh;
   margin: 0;
