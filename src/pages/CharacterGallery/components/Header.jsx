@@ -1,8 +1,14 @@
 import styled from "@emotion/styled";
+import useProjectMutation from "../../../features/drawing/hooks/useProjectMutation";
 
-function CharacterGallery() {
+function Header({ onMenuClick }) {
+  const { mutate } = useProjectMutation();
+
   return (
     <header css={{ padding: "10px 0", borderBottom: "1px solid #eceff1" }}>
+      <button type="button" onClick={() => mutate()}>
+        SEND
+      </button>
       <menu
         css={{
           display: "flex",
@@ -11,7 +17,7 @@ function CharacterGallery() {
           listStyle: "none",
         }}
       >
-        <MenuList>Alphabet</MenuList>
+        <MenuList onClick={() => onMenuClick(97)}>Alphabets</MenuList>
         <MenuList>Numbers</MenuList>
         <MenuList>Others</MenuList>
       </menu>
@@ -26,9 +32,9 @@ const MenuList = styled.li`
 
   &:hover,
   &:focus {
-    color: rgba(85, 85, 85, 0.33);
+    color: ${({ theme }) => theme.colors.lightgrey};
     cursor: pointer;
   }
 `;
 
-export default CharacterGallery;
+export default Header;

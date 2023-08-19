@@ -1,28 +1,28 @@
 import styled from "@emotion/styled";
 
-function Frame({ children }) {
+function Frame({ unicode, onFrameClick, children }) {
   return (
-    <div
-      css={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-      }}
-    >
-      <StyledDiv />
-      <h4 css={{ marginTop: "5px", cursor: "pointer" }}>{children}</h4>
-    </div>
+    <Wrapper role="button" aria-hidden="true" onClick={onFrameClick}>
+      <StyledFrame>{children}</StyledFrame>
+      <h4 css={{ marginTop: "5px", cursor: "pointer" }}>
+        {String.fromCharCode(unicode)}
+      </h4>
+    </Wrapper>
   );
 }
 
-const StyledDiv = styled.div`
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  text-align: center;
+`;
+
+const StyledFrame = styled.div`
   width: 7vw;
   height: 13vh;
   margin: 0;
-  box-shadow:
-    rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  box-shadow: ${({ theme }) => theme.shadows.frame};
   cursor: pointer;
 `;
 
