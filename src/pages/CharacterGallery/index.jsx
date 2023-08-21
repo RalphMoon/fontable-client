@@ -1,12 +1,11 @@
-import styled from "@emotion/styled";
-
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import styled from "@emotion/styled";
 
 import Header from "./components/Header";
 import AlphabetGallery from "./components/AlphabetGallery";
 import Modal from "../../components/shared/Modal";
-import DrawingPad from "../../features/drawing/components/DrawingPad";
+import CharacterWritingPad from "../../features/drawing/components/CharacterWritingPad";
 
 function CharacterGallery() {
   const [ isOpen, setIsOpen ] = useState(false);
@@ -34,7 +33,7 @@ function CharacterGallery() {
       {isOpen &&
         createPortal(
           <Modal onModalClick={closeModal}>
-            <DrawingPad />
+            <CharacterWritingPad />
           </Modal>,
           portalRoot
         )}
