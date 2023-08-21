@@ -14,7 +14,7 @@ function WritingLine({ width, height, lines }) {
           key={index}
           x1="0"
           y1={line.y}
-          x2="1000"
+          x2={width}
           y2={line.y}
           stroke={line.stroke}
           strokeWidth="2"
