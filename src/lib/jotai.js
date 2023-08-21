@@ -17,6 +17,11 @@ export const totalCharsAtom = atom((get) => {
   const lowerAlphabets = get(lowerAlphabetsAtom);
 
   const totalChars = [ ...upperAlphabets, ...lowerAlphabets ];
+  const charEntity = {};
+
+  totalChars.forEach(({ unicode, paths }) => {
+    charEntity[unicode] = paths;
+  });
 
   return totalChars;
 });
@@ -57,3 +62,5 @@ export const replacePathsAtom = atom(null, (get, set, newPaths) => {
 
   set(currentCharsAtom, chars);
 });
+
+export const sentenceDomAtom = atom(null);

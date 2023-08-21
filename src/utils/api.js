@@ -17,3 +17,13 @@ export async function login(token) {
     throw error;
   }
 }
+
+export async function createProject(imageUrl) {
+  try {
+    const { data } = await client.post("/projects", { imageUrl });
+
+    return data.result;
+  } catch (error) {
+    throw error;
+  }
+}
