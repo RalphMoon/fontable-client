@@ -9,6 +9,7 @@ import Modal from "../../components/shared/Modal";
 import CharacterWritingPad from "../../features/drawing/components/CharacterWritingPad";
 import ExportButton from "../../features/export/components/ExportButton";
 import ExportMenu from "../../features/export/components/ExportMenu";
+import OtherGallery from "./components/OtherGallery";
 
 function CharacterGallery() {
   const [ isOpen, setIsOpen ] = useState(false);
@@ -35,6 +36,7 @@ function CharacterGallery() {
       <StyledMain>
         {menuCode === 97 && <AlphabetGallery openModal={openModal} />}
         {menuCode === 48 && <NumberGallery openModal={openModal} />}
+        {menuCode === 33 && <OtherGallery openModal={openModal} />}
         <ExportButton openMenu={openModal} />
       </StyledMain>
       {isOpen &&
@@ -59,7 +61,7 @@ function CharacterGallery() {
 
 const StyledMain = styled.main`
   display: grid;
-  grid-template-columns: repeat(7, 0.5fr);
+  grid-template-columns: repeat(8, 0.5fr);
   margin-top: 30px;
   align-items: center;
 `;
