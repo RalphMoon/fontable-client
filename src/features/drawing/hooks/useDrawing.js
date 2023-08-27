@@ -17,6 +17,31 @@ function useDrawing() {
     };
   }
 
+  function formulatePathString(path) {
+    const [ start, ...rest ] = path;
+    const startPointCommand = `M ${start.join(" ")}`;
+
+    if (path.length < 2) return startPointCommand;
+
+    let pathCommand = startPointCommand;
+
+    for (let i = 1; i < rest.length - 1; i += 1) {
+      const controlPoint = rest[i];
+      const endPoint = rest[i + 1] || controlPoint;
+
+      pathCommand += ` Q ${controlPoint.join(" ")} ${endPoint.join(" ")}`;
+    }
+
+    for (let i = rest.length - 1; i >= 0; i -= 1) {
+      const controlPoint = rest[i];
+      const endPoint = rest[i - 1] || start;
+
+      pathCommand += ` Q ${controlPoint.join(" ")} ${endPoint.join(" ")}`;
+    }
+
+    return pathCommand;
+  }
+
   function startDrawing(ev) {
     const { x, y } = getRelativePosition(ev);
 
@@ -34,31 +59,10 @@ function useDrawing() {
 
   function stopDrawing() {
     if (isDrawing) {
-      setPaths(currentPath);
+      setPaths(formulatePathString(currentPath));
       setCurrentPath(null);
       setIsDrawing(false);
     }
-  }
-
-  function generateCurvePath(path) {
-    const [ start, ...rest ] = path;
-    const startPointCommand = `M ${start.join(" ")}`;
-
-    if (path.length < 3) return startPointCommand;
-
-    let pathCommand = startPointCommand;
-
-    for (let i = 1; i < rest.length - 1; i += 2) {
-      const firstControlPoint = rest[i];
-      const secondControlPoint = rest[i + 1];
-      const endPoint = rest[i + 2] || secondControlPoint;
-
-      pathCommand += ` C ${firstControlPoint.join(
-        " "
-      )} ${secondControlPoint.join(" ")} ${endPoint.join(" ")}`;
-    }
-
-    return pathCommand;
   }
 
   return {
@@ -68,7 +72,7 @@ function useDrawing() {
     startDrawing,
     draw,
     stopDrawing,
-    generateCurvePath,
+    formulatePathString,
   };
 }
 

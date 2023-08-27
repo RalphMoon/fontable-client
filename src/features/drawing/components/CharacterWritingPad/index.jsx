@@ -12,14 +12,14 @@ function CharacterWritingPad() {
     startDrawing,
     draw,
     stopDrawing,
-    generateCurvePath,
+    formulatePathString,
     isDrawing,
     currentPath,
   } = useDrawing();
   const { paths = [] } = useAtomValue(charAtom);
-  const lines = Array.from({ length: 26 }, (_, index) => ({
-    y: index * 30 + 20,
-    stroke: "#D9D9D9",
+  const lines = Array.from({ length: 39 }, (_, index) => ({
+    y: index * 20 + 20,
+    stroke: index === 2 || index === 11 ? "#EF5350" : "#D9D9D9",
   }));
 
   return (
@@ -47,20 +47,21 @@ function CharacterWritingPad() {
         onTouchCancel={stopDrawing}
         css={svgStyle}
       >
-        {paths.map((path, index) => (
+        {paths.map((path) => (
           <path
-            key={index}
-            d={generateCurvePath(path)}
+            key={path}
+            d={path}
             stroke="black"
-            strokeWidth="5"
+            strokeWidth="4"
             fill="none"
           />
         ))}
+
         {isDrawing && (
           <path
-            d={generateCurvePath(currentPath)}
+            d={formulatePathString(currentPath)}
             stroke="black"
-            strokeWidth="5"
+            strokeWidth="4"
             fill="none"
           />
         )}

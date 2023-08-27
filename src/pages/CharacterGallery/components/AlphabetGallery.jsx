@@ -20,7 +20,7 @@ function AlphabetGallery({ openModal }) {
 
   function handleClick(unicode) {
     setUnicode(unicode);
-    openModal();
+    openModal(true);
   }
 
   function toggleCase() {
