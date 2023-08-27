@@ -13,7 +13,7 @@ function Header({ onMenuClick }) {
       >
         <MenuList onClick={() => onMenuClick(97)}>Alphabets</MenuList>
         <MenuList onClick={() => onMenuClick(48)}>Numbers</MenuList>
-        <MenuList>Others</MenuList>
+        <MenuList onClick={() => onMenuClick(33)}>Others</MenuList>
       </menu>
     </header>
   );
