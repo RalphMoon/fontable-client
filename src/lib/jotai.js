@@ -12,18 +12,15 @@ export const lowerAlphabetsAtom = atom(
   Array.from({ length: 26 }, (_, index) => ({ unicode: index + 97, paths: [] }))
 );
 
-export const totalCharsAtom = atom((get) => {
+export const unicodePathsAtom = atom((get) => {
   const upperAlphabets = get(upperAlphabetsAtom);
   const lowerAlphabets = get(lowerAlphabetsAtom);
 
-  const totalChars = [ ...upperAlphabets, ...lowerAlphabets ];
-  const charEntity = {};
+  const unicodePaths = [ ...upperAlphabets, ...lowerAlphabets ]
+    .filter(({ paths }) => paths.length > 0)
+    .map(({ unicode, paths }) => ({ unicode, pathString: paths.join(" ") }));
 
-  totalChars.forEach(({ unicode, paths }) => {
-    charEntity[unicode] = paths;
-  });
-
-  return totalChars;
+  return unicodePaths;
 });
 
 export const currentCharsAtom = atom((get) => {
@@ -56,9 +53,7 @@ export const replacePathsAtom = atom(null, (get, set, newPaths) => {
 
   if (index === -1) return;
 
-  const prevPath = chars[index].paths;
-
-  chars[index].paths = [ ...prevPath, newPaths ];
+  chars[index].paths.push(newPaths);
 
   set(currentCharsAtom, chars);
 });

@@ -1,15 +1,17 @@
-import styled from "@emotion/styled";
-
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import styled from "@emotion/styled";
 
 import Header from "./components/Header";
 import AlphabetGallery from "./components/AlphabetGallery";
 import Modal from "../../components/shared/Modal";
-import DrawingPad from "../../features/drawing/components/DrawingPad";
+import CharacterWritingPad from "../../features/drawing/components/CharacterWritingPad";
+import ExportButton from "../../features/export/components/ExportButton";
+import ExportMenu from "../../features/export/components/ExportMenu";
 
 function CharacterGallery() {
   const [ isOpen, setIsOpen ] = useState(false);
+  const [ isWritingMode, setIsWritingMode ] = useState("");
   const [ menuCode, setMenuCode ] = useState(97);
   const portalRoot = document.getElementById("portal-root");
 
@@ -17,8 +19,9 @@ function CharacterGallery() {
     setMenuCode(unicode);
   }
 
-  function openModal() {
+  function openModal(isWritingModal) {
     setIsOpen(true);
+    setIsWritingMode(isWritingModal);
   }
 
   function closeModal() {
@@ -30,11 +33,21 @@ function CharacterGallery() {
       <Header onMenuClick={handleMenu} />
       <StyledMain>
         {menuCode === 97 && <AlphabetGallery openModal={openModal} />}
+        <ExportButton openMenu={openModal} />
       </StyledMain>
       {isOpen &&
+        isWritingMode &&
         createPortal(
           <Modal onModalClick={closeModal}>
-            <DrawingPad />
+            <CharacterWritingPad />
+          </Modal>,
+          portalRoot
+        )}
+      {isOpen &&
+        !isWritingMode &&
+        createPortal(
+          <Modal onModalClick={closeModal} appearance={{ width: "300px" }}>
+            <ExportMenu />
           </Modal>,
           portalRoot
         )}

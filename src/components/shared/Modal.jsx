@@ -1,9 +1,12 @@
 import styled from "@emotion/styled";
 
-function Modal({ onModalClick, children }) {
+function Modal({ onModalClick, appearance, children }) {
   return (
     <Overlay onClick={onModalClick}>
-      <StyledModal onClick={(ev) => ev.stopPropagation()}>
+      <StyledModal
+        onClick={(ev) => ev.stopPropagation()}
+        appearance={appearance}
+      >
         {children}
       </StyledModal>
     </Overlay>
@@ -22,11 +25,12 @@ const Overlay = styled.div`
   align-items: center;
 `;
 
-const StyledModal = styled.div`
-  width: ${({ theme }) => theme.glyph.box.width};
-  height: ${({ theme }) => theme.glyph.box.height};
-  background-color: #fff;
-  border-radius: 2px;
-`;
+const StyledModal = styled.div(
+  {
+    backgroundColor: "#fff",
+    borderRadius: "2px",
+  },
+  ({ appearance }) => appearance
+);
 
 export default Modal;
