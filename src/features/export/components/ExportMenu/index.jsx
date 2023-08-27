@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import styled from "@emotion/styled";
 
 import Button from "../../../../components/shared/Button";
 
-import { fontUrlAtom, unicodePathsAtom } from "../../../../lib/jotai";
+import { unicodePathsAtom } from "../../../../lib/jotai";
 import { useUpdateProjectMutation } from "../../../drawing/hooks/useProjectMutation";
 
 function ExportMenu() {
   const [ fontType, setFontType ] = useState(null);
   const { data, mutate } = useUpdateProjectMutation();
   const unicodePaths = useAtomValue(unicodePathsAtom);
-  const [ , setFontUrl ] = useAtom(fontUrlAtom);
 
   useEffect(() => {
     if (data) {
@@ -19,10 +18,8 @@ function ExportMenu() {
       link.href = URL.createObjectURL(data);
       link.download = `font.${fontType}`;
       link.click();
-
-      setFontUrl(URL.createObjectURL(data));
     }
-  }, [ data, fontType, setFontUrl ]);
+  }, [ data, fontType ]);
 
   function exportPath(type) {
     setFontType(type);
