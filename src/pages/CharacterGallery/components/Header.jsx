@@ -12,7 +12,7 @@ function Header({ onMenuClick }) {
         }}
       >
         <MenuList onClick={() => onMenuClick(97)}>Alphabets</MenuList>
-        <MenuList>Numbers</MenuList>
+        <MenuList onClick={() => onMenuClick(48)}>Numbers</MenuList>
         <MenuList>Others</MenuList>
       </menu>
     </header>
@@ -26,7 +26,7 @@ const MenuList = styled.li`
 
   &:hover,
   &:focus {
-    color: ${({ theme }) => theme.colors.lightgrey};
+    color: ${({ theme: { colors } }) => colors.grey.light};
     cursor: pointer;
   }
 `;
