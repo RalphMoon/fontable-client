@@ -5,11 +5,11 @@ import styled from "@emotion/styled";
 import Header from "./components/Header";
 import AlphabetGallery from "./components/AlphabetGallery";
 import NumberGallery from "./components/NumberGallery";
+import OtherGallery from "./components/OtherGallery";
 import Modal from "../../components/shared/Modal";
 import CharacterWritingPad from "../../features/drawing/components/CharacterWritingPad";
 import ExportButton from "../../features/export/components/ExportButton";
 import ExportMenu from "../../features/export/components/ExportMenu";
-import OtherGallery from "./components/OtherGallery";
 
 function CharacterGallery() {
   const [ isOpen, setIsOpen ] = useState(false);
