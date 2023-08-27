@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 
 import Header from "./components/Header";
 import AlphabetGallery from "./components/AlphabetGallery";
+import NumberGallery from "./components/NumberGallery";
 import Modal from "../../components/shared/Modal";
 import CharacterWritingPad from "../../features/drawing/components/CharacterWritingPad";
 import ExportButton from "../../features/export/components/ExportButton";
@@ -33,6 +34,7 @@ function CharacterGallery() {
       <Header onMenuClick={handleMenu} />
       <StyledMain>
         {menuCode === 97 && <AlphabetGallery openModal={openModal} />}
+        {menuCode === 48 && <NumberGallery openModal={openModal} />}
         <ExportButton openMenu={openModal} />
       </StyledMain>
       {isOpen &&
