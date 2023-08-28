@@ -1,4 +1,5 @@
 import { useTheme } from "@emotion/react";
+
 import Button from "../shared/Button";
 
 function ErrorFallback({ error, resetErrorBoundary }) {
