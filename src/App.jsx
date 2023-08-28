@@ -1,16 +1,21 @@
 import { Route, Routes } from "react-router-dom";
 
+import { AuthProvider } from "./contexts/AuthContext";
 import Login from "./pages/Login";
-import CharacterGallery from "./pages/CharacterGallery";
+import Lobby from "./pages/Lobby";
 import CreateProject from "./pages/CreateProject";
+import CharacterGallery from "./pages/CharacterGallery";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/new" element={<CreateProject />} />
-      <Route path="/projects/:project_id" element={<CharacterGallery />} />
-    </Routes>
+    <AuthProvider>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Lobby />} />
+        <Route path="/new" element={<CreateProject />} />
+        <Route path="/projects/:project_id" element={<CharacterGallery />} />
+      </Routes>
+    </AuthProvider>
   );
 }
 

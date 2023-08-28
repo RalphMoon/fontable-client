@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
+import { FacebookAuthProvider } from "@firebase/auth";
 import { useTheme } from "@emotion/react";
-import { FacebookAuthProvider, signInWithPopup } from "@firebase/auth";
-import { auth } from "../../services/firebase";
+
+import useAuth from "../../hooks/useAuth";
 import useLoginMutation from "../../hooks/useLoginMutation";
 
 import Button from "../../../../components/shared/Button";
@@ -8,14 +10,17 @@ import Button from "../../../../components/shared/Button";
 import facebookLogoURL from "../../../../assets/facebook_logo.svg";
 
 function FacebookButton() {
+  const { signIn } = useAuth();
   const { mutate } = useLoginMutation();
+  const navigate = useNavigate();
   const theme = useTheme();
 
   async function handleLogin() {
-    const { user } = await signInWithPopup(auth, new FacebookAuthProvider());
+    const { user } = await signIn(new FacebookAuthProvider());
     const token = await user.getIdToken();
 
     mutate({ token });
+    navigate("/");
   }
 
   return (
