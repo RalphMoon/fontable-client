@@ -30,7 +30,7 @@ function Header({ children }) {
       </Button>
       {children}
       <Image
-        url={currentUser.photoURL}
+        url={currentUser?.photoURL}
         label="User Profile"
         appearance={{ borderRadius: "100%" }}
       />
