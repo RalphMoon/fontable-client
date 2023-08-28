@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { FacebookAuthProvider } from "@firebase/auth";
 import { useTheme } from "@emotion/react";
 
@@ -12,7 +11,6 @@ import facebookLogoURL from "../../../../assets/facebook_logo.svg";
 function FacebookButton() {
   const { signIn } = useAuth();
   const { mutate } = useLoginMutation();
-  const navigate = useNavigate();
   const theme = useTheme();
 
   async function handleLogin() {
@@ -20,7 +18,6 @@ function FacebookButton() {
     const token = await user.getIdToken();
 
     mutate({ token });
-    navigate("/");
   }
 
   return (
