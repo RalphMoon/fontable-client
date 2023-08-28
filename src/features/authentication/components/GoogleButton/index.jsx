@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { GoogleAuthProvider } from "@firebase/auth";
 
 import useAuth from "../../hooks/useAuth";
@@ -11,14 +10,12 @@ import googleLogoURL from "../../../../assets/google_logo.svg";
 function GoogleButton() {
   const { signIn } = useAuth();
   const { mutate } = useLoginMutation();
-  const navigate = useNavigate();
 
   async function handleLogin() {
     const { user } = await signIn(new GoogleAuthProvider());
     const token = await user.getIdToken();
 
     mutate({ token });
-    navigate("/");
   }
 
   return (
