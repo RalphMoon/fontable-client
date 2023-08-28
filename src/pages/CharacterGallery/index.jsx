@@ -2,7 +2,8 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "@emotion/styled";
 
-import Header from "./components/Header";
+import Header from "../../components/Header";
+import CharacterMenu from "./components/CharacterMenu";
 import AlphabetGallery from "./components/AlphabetGallery";
 import NumberGallery from "./components/NumberGallery";
 import OtherGallery from "./components/OtherGallery";
@@ -32,7 +33,9 @@ function CharacterGallery() {
 
   return (
     <>
-      <Header onMenuClick={handleMenu} />
+      <Header>
+        <CharacterMenu onMenuClick={handleMenu} />
+      </Header>
       <StyledMain>
         {menuCode === 97 && <AlphabetGallery openModal={openModal} />}
         {menuCode === 48 && <NumberGallery openModal={openModal} />}
