@@ -1,5 +1,7 @@
-import { GoogleAuthProvider, signInWithPopup } from "@firebase/auth";
-import { auth } from "../../services/firebase";
+import { useNavigate } from "react-router-dom";
+import { GoogleAuthProvider } from "@firebase/auth";
+
+import useAuth from "../../hooks/useAuth";
 import useLoginMutation from "../../hooks/useLoginMutation";
 
 import Button from "../../../../components/shared/Button";
@@ -7,13 +9,16 @@ import Button from "../../../../components/shared/Button";
 import googleLogoURL from "../../../../assets/google_logo.svg";
 
 function GoogleButton() {
+  const { signIn } = useAuth();
   const { mutate } = useLoginMutation();
+  const navigate = useNavigate();
 
   async function handleLogin() {
-    const { user } = await signInWithPopup(auth, new GoogleAuthProvider());
+    const { user } = await signIn(new GoogleAuthProvider());
     const token = await user.getIdToken();
 
     mutate({ token });
+    navigate("/");
   }
 
   return (
