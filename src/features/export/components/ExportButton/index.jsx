@@ -8,7 +8,7 @@ function ExportButton({ openMenu }) {
   }
 
   return (
-    <div css={{ position: "absolute", right: "5%", bottom: "10px" }}>
+    <div css={{ position: "absolute", right: "37px", bottom: "30px" }}>
       <Button
         onButtonClick={handleClick}
         appearance={{

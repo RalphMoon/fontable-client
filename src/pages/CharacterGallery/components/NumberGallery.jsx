@@ -14,13 +14,13 @@ function NumberGallery({ openModal }) {
 
   return (
     <>
-      {numbers.map(({ unicode, paths }) => (
+      {numbers.map(({ unicode, pathString }) => (
         <Frame
           key={unicode}
           unicode={unicode}
           onFrameClick={() => handleClick(unicode)}
         >
-          <ThumbnailPad paths={paths} />
+          <ThumbnailPad path={pathString} />
         </Frame>
       ))}
     </>

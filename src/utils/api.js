@@ -18,9 +18,9 @@ export async function login(token) {
   }
 }
 
-export async function createProject(imageUrl) {
+export async function getProjectList(uid) {
   try {
-    const { data } = await client.post("/project", { imageUrl });
+    const { data } = await client.get(`/users/${uid}/projects`);
 
     return data.result;
   } catch (error) {
@@ -28,20 +28,42 @@ export async function createProject(imageUrl) {
   }
 }
 
-export async function updateProject(unicodePaths, fontType) {
+export async function getProject(uid, pathname) {
   try {
-    const { data } = await client.put(
-      `/project?export=${fontType}`,
-      {
-        unicodePaths,
-      },
-      {
-        responseType: "arraybuffer",
-      }
-    );
-    const blob = new Blob([data], { type: "application/octet-stream" });
+    const { data } = await client.get(`/users/${uid}${pathname}`);
 
-    return blob;
+    return data.result;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function createProject(uid, fontFamilyName) {
+  try {
+    const { data } = await client.post(`/users/${uid}/projects`, {
+      fontFamilyName,
+    });
+
+    return data.result;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function updateProject(uid, pathname, unicodePaths, exportType) {
+  try {
+    const endpoint = exportType
+      ? `/users/${uid}${pathname}?export_type=${exportType}`
+      : `/users/${uid}${pathname}`;
+    const headers = exportType ? { responseType: "arraybuffer" } : {};
+
+    const { data } = await client.put(endpoint, { unicodePaths }, headers);
+
+    if (exportType) {
+      const blob = new Blob([data], { type: "application/octet-stream" });
+
+      return blob;
+    }
   } catch (error) {
     throw error;
   }

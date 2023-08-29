@@ -16,13 +16,13 @@ function OtherGallery({ openModal }) {
 
   return (
     <>
-      {others.map(({ unicode, paths }) => (
+      {others.map(({ unicode, pathString }) => (
         <Frame
           key={unicode}
           unicode={unicode}
           onFrameClick={() => handleClick(unicode)}
         >
-          <ThumbnailPad paths={paths} />
+          <ThumbnailPad path={pathString} />
         </Frame>
       ))}
     </>

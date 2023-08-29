@@ -4,8 +4,8 @@ import styled from "@emotion/styled";
 
 import Button from "../../../../components/shared/Button";
 
+import useUpdateProjectMutation from "../../../projects/hooks/useUpdateProjectMutation";
 import { unicodePathsAtom } from "../../../../lib/jotai";
-import { useUpdateProjectMutation } from "../../../drawing/hooks/useProjectMutation";
 
 function ExportMenu() {
   const [ fontType, setFontType ] = useState(null);

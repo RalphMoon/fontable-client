@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 export const global = css`
-  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@400;500&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,500;1,700;1,900&display=swap");
 
   html,
   body,
@@ -18,13 +18,16 @@ export const global = css`
     color: #424242;
   }
 
-  @keyframes fadein {
-    from {
-      opacity: 0;
-    }
+  li {
+    list-style: none;
+  }
 
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
     to {
-      opacity: 1;
+      transform: rotate(360deg);
     }
   }
 `;

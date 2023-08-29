@@ -6,7 +6,7 @@ import Button from "../shared/Button";
 import Image from "../shared/Image";
 
 function Header({ children }) {
-  const { currentUser } = useAuth();
+  const { currentUser, signOut } = useAuth();
   const navigate = useNavigate();
 
   return (
@@ -14,7 +14,7 @@ function Header({ children }) {
       css={{
         display: "flex",
         justifyContent: "space-between",
-        padding: "20px 10px",
+        padding: "20px 17px",
       }}
     >
       <Button
@@ -29,11 +29,21 @@ function Header({ children }) {
         <Image url={appLogoUrl} label="App Logo" />
       </Button>
       {children}
-      <Image
-        url={currentUser?.photoURL}
-        label="User Profile"
-        appearance={{ borderRadius: "100%" }}
-      />
+      <Button
+        onButtonClick={signOut}
+        appearance={{
+          padding: "0",
+          margin: "0",
+          backgroundColor: "transparent",
+          boxShadow: "none",
+        }}
+      >
+        <Image
+          url={currentUser?.photoURL}
+          label="User Profile"
+          appearance={{ width: "44px", borderRadius: "100%" }}
+        />
+      </Button>
     </header>
   );
 }

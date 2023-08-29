@@ -1,6 +1,6 @@
 import useDrawing from "../../hooks/useDrawing";
 
-function ThumbnailPad({ paths }) {
+function ThumbnailPad({ path }) {
   const { svgRef } = useDrawing();
 
   return (
@@ -13,9 +13,7 @@ function ThumbnailPad({ paths }) {
       xmlns="http://www.w3.org/2000/svg"
       css={{ width: "100%", height: "100%" }}
     >
-      {paths.map((path) => (
-        <path key={path} d={path} stroke="black" strokeWidth="4" fill="none" />
-      ))}
+      <path d={path} stroke="black" strokeWidth="4" fill="none" />
     </svg>
   );
 }
