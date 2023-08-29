@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "@emotion/styled";
 
+import { useAtomValue } from "jotai";
 import Header from "../../components/Header";
 import CharacterMenu from "./components/CharacterMenu";
 import AlphabetGallery from "./components/AlphabetGallery";
@@ -12,7 +13,15 @@ import CharacterWritingPad from "../../features/drawing/components/CharacterWrit
 import ExportButton from "../../features/export/components/ExportButton";
 import ExportMenu from "../../features/export/components/ExportMenu";
 
+import useProjectQuery from "../../features/projects/hooks/useProjectQuery";
+import useUpdateProjectMutation from "../../features/projects/hooks/useUpdateProjectMutation";
+import { unicodePathsAtom } from "../../lib/jotai";
+
 function CharacterGallery() {
+  useProjectQuery();
+
+  const { mutate } = useUpdateProjectMutation();
+  const unicodePaths = useAtomValue(unicodePathsAtom);
   const [ isOpen, setIsOpen ] = useState(false);
   const [ isWritingMode, setIsWritingMode ] = useState("");
   const [ menuCode, setMenuCode ] = useState(97);
@@ -29,6 +38,7 @@ function CharacterGallery() {
 
   function closeModal() {
     setIsOpen(false);
+    mutate({ unicodePaths });
   }
 
   return (

@@ -4,52 +4,41 @@ export const store = createStore();
 
 export const unicodeAtom = atom(0);
 
-export const upperAlphabetsAtom = atom(
-  Array.from({ length: 26 }, (_, index) => ({ unicode: index + 65, paths: [] }))
-);
+export const unicodePathsAtom = atom([]);
 
-export const lowerAlphabetsAtom = atom(
-  Array.from({ length: 26 }, (_, index) => ({ unicode: index + 97, paths: [] }))
-);
+export const upperAlphabetsAtom = atom((get) => {
+  const unicodePaths = get(unicodePathsAtom);
+  const upperAlphabets = unicodePaths.slice(32, 58);
 
-export const numbersAtom = atom(() => {
-  const numbers = Array.from({ length: 10 }, (_, index) => ({
-    unicode: index + 48,
-    paths: [],
-  }));
+  return upperAlphabets;
+});
+
+export const lowerAlphabetsAtom = atom((get) => {
+  const unicodePaths = get(unicodePathsAtom);
+  const lowerAlphabets = unicodePaths.slice(64, 90);
+
+  return lowerAlphabets;
+});
+
+export const numbersAtom = atom((get) => {
+  const unicodePaths = get(unicodePathsAtom);
+  const numbers = unicodePaths.slice(15, 25);
 
   numbers.push(numbers.shift());
 
   return numbers;
 });
 
-export const othersAtom = atom(
-  Array.from({ length: 32 }, (_, index) => {
-    const unicodes = [
-      33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 58, 59, 60,
-      61, 62, 63, 64, 91, 92, 93, 94, 95, 96, 123, 124, 125, 126,
-    ];
+export const othersAtom = atom((get) => {
+  const unicodePaths = get(unicodePathsAtom);
+  const others = [
+    ...unicodePaths.slice(0, 15),
+    ...unicodePaths.slice(25, 32),
+    ...unicodePaths.slice(58, 64),
+    ...unicodePaths.slice(90, 94),
+  ];
 
-    return { unicode: unicodes[index], paths: [] };
-  })
-);
-
-export const unicodePathsAtom = atom((get) => {
-  const upperAlphabets = get(upperAlphabetsAtom);
-  const lowerAlphabets = get(lowerAlphabetsAtom);
-  const numbers = get(numbersAtom);
-  const others = get(othersAtom);
-
-  const unicodePaths = [
-    ...upperAlphabets,
-    ...lowerAlphabets,
-    ...numbers,
-    ...others,
-  ]
-    .filter(({ paths }) => paths.length > 0)
-    .map(({ unicode, paths }) => ({ unicode, pathString: paths.join(" ") }));
-
-  return unicodePaths;
+  return others;
 });
 
 export const currentCharsAtom = atom((get) => {
@@ -90,8 +79,7 @@ export const replacePathsAtom = atom(null, (get, set, newPaths) => {
 
   if (index === -1) return;
 
-  chars[index].paths.push(newPaths);
-
+  chars[index].pathString += newPaths;
   set(currentCharsAtom, chars);
 });
 

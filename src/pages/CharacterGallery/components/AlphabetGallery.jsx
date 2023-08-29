@@ -15,7 +15,7 @@ function AlphabetGallery({ openModal }) {
   const [ isLowercase, setIsLowercase ] = useState(true);
   const lowerAlphabets = useAtomValue(lowerAlphabetsAtom);
   const upperAlphabets = useAtomValue(upperAlphabetsAtom);
-  const unicodes = isLowercase ? lowerAlphabets : upperAlphabets;
+  const alphabets = isLowercase ? lowerAlphabets : upperAlphabets;
   const setUnicode = useSetAtom(unicodeAtom);
 
   function handleClick(unicode) {
@@ -29,16 +29,16 @@ function AlphabetGallery({ openModal }) {
 
   return (
     <>
-      {unicodes.map(({ unicode, paths }) => (
+      {alphabets.map(({ unicode, pathString }) => (
         <Frame
           key={unicode}
           unicode={unicode}
           onFrameClick={() => handleClick(unicode)}
         >
-          <ThumbnailPad paths={paths} />
+          <ThumbnailPad path={pathString} />
         </Frame>
       ))}
-      <div css={{ position: "absolute", right: "11%", bottom: "10px" }}>
+      <div css={{ position: "absolute", right: "120px", bottom: "33px" }}>
         <Toggle toggleEnabled={isLowercase} onToggleClick={toggleCase}>
           {isLowercase ? "a" : "A"}
         </Toggle>

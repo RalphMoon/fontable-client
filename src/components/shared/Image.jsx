@@ -7,7 +7,7 @@ function Image({ url, label, appearance }) {
 const StyledImage = styled.div(
   {
     width: "40px",
-    height: "40px",
+    height: "44px",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
