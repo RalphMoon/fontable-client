@@ -33,9 +33,9 @@ export const othersAtom = atom((get) => {
   const unicodePaths = get(unicodePathsAtom);
   const others = [
     ...unicodePaths.slice(0, 15),
-    ...unicodePaths.slice(18, 25),
     ...unicodePaths.slice(25, 32),
-    // ...unicodePaths.slice(90, 95),
+    ...unicodePaths.slice(58, 64),
+    ...unicodePaths.slice(90, 94),
   ];
 
   return others;
