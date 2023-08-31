@@ -8,7 +8,7 @@ function useProjectListQuery() {
   const userId = currentUser?.uid;
 
   const query = useQuery({
-    queryKey: ["projects"],
+    queryKey: [ "projects", userId ],
     queryFn: () => getProjectList(userId),
     enabled: !!userId,
   });
