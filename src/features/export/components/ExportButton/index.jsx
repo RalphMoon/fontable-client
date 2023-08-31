@@ -2,15 +2,11 @@ import Button from "../../../../components/shared/Button";
 
 import importIconUrl from "../../../../assets/import_icon.svg";
 
-function ExportButton({ openMenu }) {
-  function handleClick() {
-    openMenu(false);
-  }
-
+function ExportButton({ openModal }) {
   return (
     <div css={{ position: "absolute", right: "37px", bottom: "30px" }}>
       <Button
-        onButtonClick={handleClick}
+        onButtonClick={openModal}
         appearance={{
           width: "60px",
           height: "60px",

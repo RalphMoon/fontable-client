@@ -1,25 +1,26 @@
 import { useEffect, useState } from "react";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
+import { saveAs } from "file-saver";
 import styled from "@emotion/styled";
 
 import Button from "../../../../components/shared/Button";
 
 import useUpdateProjectMutation from "../../../projects/hooks/useUpdateProjectMutation";
-import { unicodePathsAtom } from "../../../../lib/jotai";
+import { fontUrlAtom, unicodePathsAtom } from "../../../../lib/jotai";
 
-function ExportMenu() {
+function ExportMenu({ fontFamilyName }) {
   const [ fontType, setFontType ] = useState(null);
   const { data, mutate } = useUpdateProjectMutation();
   const unicodePaths = useAtomValue(unicodePathsAtom);
+  const setFontUrl = useSetAtom(fontUrlAtom);
 
   useEffect(() => {
     if (data) {
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(data);
-      link.download = `font.${fontType}`;
-      link.click();
+      const blob = new Blob([data], { type: "application/octet-stream" });
+      setFontUrl(URL.createObjectURL(blob));
+      saveAs(blob, `${fontFamilyName}.${fontType}`);
     }
-  }, [ data, fontType ]);
+  }, [ data, fontFamilyName, fontType, setFontUrl ]);
 
   function exportPath(type) {
     setFontType(type);
@@ -42,14 +43,6 @@ function ExportMenu() {
           appearance={{ width: "100%", fontSize: "50px" }}
         >
           <strong>TTF</strong>
-        </Button>
-      </StyledList>
-      <StyledList>
-        <Button
-          onButtonClick={() => exportPath("woff")}
-          appearance={{ width: "100%", fontSize: "50px" }}
-        >
-          <strong>WOFF</strong>
         </Button>
       </StyledList>
     </menu>

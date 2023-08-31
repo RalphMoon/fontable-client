@@ -1,8 +1,12 @@
 import styled from "@emotion/styled";
 
-function Button({ onButtonClick, appearance, children }) {
+function Button({ type, onButtonClick, appearance, children }) {
   return (
-    <StyledButton type="button" onClick={onButtonClick} appearance={appearance}>
+    <StyledButton
+      type={type || "button"}
+      onClick={onButtonClick}
+      appearance={appearance}
+    >
       {children}
     </StyledButton>
   );

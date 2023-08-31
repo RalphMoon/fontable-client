@@ -84,3 +84,5 @@ export const replacePathsAtom = atom(null, (get, set, newPaths) => {
 });
 
 export const sentenceDomAtom = atom(null);
+
+export const fontUrlAtom = atom(null);

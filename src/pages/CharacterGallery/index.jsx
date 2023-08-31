@@ -18,12 +18,12 @@ import useUpdateProjectMutation from "../../features/projects/hooks/useUpdatePro
 import { unicodePathsAtom } from "../../lib/jotai";
 
 function CharacterGallery() {
-  useProjectQuery();
+  const { data: project } = useProjectQuery();
 
   const { mutate } = useUpdateProjectMutation();
   const unicodePaths = useAtomValue(unicodePathsAtom);
   const [ isOpen, setIsOpen ] = useState(false);
-  const [ isWritingMode, setIsWritingMode ] = useState("");
+  const [ modalMode, setModalMode ] = useState(null);
   const [ menuCode, setMenuCode ] = useState(97);
   const portalRoot = document.getElementById("portal-root");
 
@@ -31,13 +31,14 @@ function CharacterGallery() {
     setMenuCode(unicode);
   }
 
-  function openModal(isWritingModal) {
+  function openModal(mode) {
     setIsOpen(true);
-    setIsWritingMode(isWritingModal);
+    setModalMode(mode);
   }
 
   function closeModal() {
     setIsOpen(false);
+    setModalMode(null);
     mutate({ unicodePaths });
   }
 
@@ -47,13 +48,19 @@ function CharacterGallery() {
         <CharacterMenu onMenuClick={handleMenu} />
       </Header>
       <StyledMain>
-        {menuCode === 97 && <AlphabetGallery openModal={openModal} />}
-        {menuCode === 48 && <NumberGallery openModal={openModal} />}
-        {menuCode === 33 && <OtherGallery openModal={openModal} />}
-        <ExportButton openMenu={openModal} />
+        {menuCode === 97 && (
+          <AlphabetGallery openModal={() => openModal("write")} />
+        )}
+        {menuCode === 48 && (
+          <NumberGallery openModal={() => openModal("write")} />
+        )}
+        {menuCode === 33 && (
+          <OtherGallery openModal={() => openModal("write")} />
+        )}
+        <ExportButton openModal={() => openModal("export")} />
       </StyledMain>
       {isOpen &&
-        isWritingMode &&
+        modalMode === "write" &&
         createPortal(
           <Modal onModalClick={closeModal}>
             <CharacterWritingPad />
@@ -61,10 +68,10 @@ function CharacterGallery() {
           portalRoot
         )}
       {isOpen &&
-        !isWritingMode &&
+        modalMode === "export" &&
         createPortal(
           <Modal onModalClick={closeModal} appearance={{ width: "300px" }}>
-            <ExportMenu />
+            <ExportMenu fontFamilyName={project.name} />
           </Modal>,
           portalRoot
         )}
