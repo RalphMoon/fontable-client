@@ -20,7 +20,7 @@ function ExportMenu({ fontFamilyName }) {
       setFontUrl(URL.createObjectURL(blob));
       saveAs(blob, `${fontFamilyName}.${fontType}`);
     }
-  }, [ data, fontFamilyName, fontType ]);
+  }, [ data, fontFamilyName, fontType, setFontUrl ]);
 
   function exportPath(type) {
     setFontType(type);
