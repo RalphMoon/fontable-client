@@ -17,7 +17,7 @@ import useProjectQuery from "../../features/projects/hooks/useProjectQuery";
 import useUpdateProjectMutation from "../../features/projects/hooks/useUpdateProjectMutation";
 import { unicodePathsAtom } from "../../lib/jotai";
 
-function CharacterGallery() {
+function Project() {
   const { data: project } = useProjectQuery();
 
   const { mutate } = useUpdateProjectMutation();
@@ -86,4 +86,4 @@ const StyledMain = styled.main`
   align-items: center;
 `;
 
-export default CharacterGallery;
+export default Project;

@@ -8,7 +8,7 @@ import Spinner from "./components/Loading/Spinner";
 
 const Login = lazy(() => import("./pages/Login"));
 const Lobby = lazy(() => import("./pages/Lobby"));
-const CharacterGallery = lazy(() => import("./pages/CharacterGallery"));
+const Project = lazy(() => import("./pages/Project"));
 
 function App() {
   return (
@@ -19,10 +19,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route element={<PrivateRoutes />}>
             <Route path="/" element={<Lobby />} />
-            <Route
-              path="/projects/:project_id"
-              element={<CharacterGallery />}
-            />
+            <Route path="/projects/:project_id" element={<Project />} />
           </Route>
         </Routes>
       </Suspense>
