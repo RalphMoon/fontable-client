@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "../../../../components/shared/Button";
 import Image from "../../../../components/shared/Image";
+import Modal from "../../../../components/shared/Modal";
 
 import useDeleteProjectMutation from "../../hooks/useDeleteProjectMutation";
 
 import deleteIconUrl from "../../../../assets/delete_icon.svg";
-import Modal from "../../../../components/shared/Modal";
 
 function DeleteButton({ projectName, projectId }) {
   const { mutate, isSuccess } = useDeleteProjectMutation();
