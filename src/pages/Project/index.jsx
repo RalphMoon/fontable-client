@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { createPortal } from "react-dom";
 import styled from "@emotion/styled";
 
 import { useAtomValue } from "jotai";
@@ -15,17 +14,15 @@ import ExportMenu from "../../features/export/components/ExportMenu";
 
 import useProjectQuery from "../../features/projects/hooks/useProjectQuery";
 import useUpdateProjectMutation from "../../features/projects/hooks/useUpdateProjectMutation";
-import { unicodePathsAtom } from "../../lib/jotai";
+import { charAtom } from "../../lib/jotai";
 
 function Project() {
   const { data: project } = useProjectQuery();
-
   const { mutate } = useUpdateProjectMutation();
-  const unicodePaths = useAtomValue(unicodePathsAtom);
+  const char = useAtomValue(charAtom);
   const [ isOpen, setIsOpen ] = useState(false);
   const [ modalMode, setModalMode ] = useState(null);
   const [ menuCode, setMenuCode ] = useState(97);
-  const portalRoot = document.getElementById("portal-root");
 
   function handleMenu(unicode) {
     setMenuCode(unicode);
@@ -39,7 +36,7 @@ function Project() {
   function closeModal() {
     setIsOpen(false);
     setModalMode(null);
-    mutate({ unicodePaths });
+    mutate({ char });
   }
 
   return (
@@ -59,22 +56,16 @@ function Project() {
         )}
         <ExportButton openModal={() => openModal("export")} />
       </StyledMain>
-      {isOpen &&
-        modalMode === "write" &&
-        createPortal(
-          <Modal onModalClick={closeModal}>
-            <CharacterWritingPad />
-          </Modal>,
-          portalRoot
-        )}
-      {isOpen &&
-        modalMode === "export" &&
-        createPortal(
-          <Modal onModalClick={closeModal} appearance={{ width: "300px" }}>
-            <ExportMenu fontFamilyName={project.name} />
-          </Modal>,
-          portalRoot
-        )}
+      {isOpen && modalMode === "write" && (
+        <Modal onModalClick={closeModal}>
+          <CharacterWritingPad />
+        </Modal>
+      )}
+      {isOpen && modalMode === "export" && (
+        <Modal onModalClick={closeModal} appearance={{ width: "300px" }}>
+          <ExportMenu fontFamilyName={project.name} />
+        </Modal>
+      )}
     </>
   );
 }

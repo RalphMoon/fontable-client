@@ -6,12 +6,12 @@ import styled from "@emotion/styled";
 import Button from "../../../../components/shared/Button";
 
 import useUpdateProjectMutation from "../../../projects/hooks/useUpdateProjectMutation";
-import { fontUrlAtom, unicodePathsAtom } from "../../../../lib/jotai";
+import { fontUrlAtom, charAtom } from "../../../../lib/jotai";
 
 function ExportMenu({ fontFamilyName }) {
   const [ fontType, setFontType ] = useState(null);
   const { data, mutate } = useUpdateProjectMutation();
-  const unicodePaths = useAtomValue(unicodePathsAtom);
+  const char = useAtomValue(charAtom);
   const setFontUrl = useSetAtom(fontUrlAtom);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function ExportMenu({ fontFamilyName }) {
 
   function exportPath(type) {
     setFontType(type);
-    mutate({ unicodePaths, fontType: type });
+    mutate({ char, fontType: type });
   }
 
   return (
