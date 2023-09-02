@@ -50,20 +50,28 @@ export async function createProject(uid, fontFamilyName) {
   }
 }
 
-export async function updateProject(uid, pathname, unicodePaths, exportType) {
+export async function updateProject(uid, pathname, char, exportType) {
   try {
     const endpoint = exportType
       ? `/users/${uid}${pathname}?export_type=${exportType}`
       : `/users/${uid}${pathname}`;
     const headers = exportType ? { responseType: "arraybuffer" } : {};
 
-    const { data } = await client.put(endpoint, { unicodePaths }, headers);
+    const { data } = await client.put(endpoint, { char }, headers);
 
     if (exportType) {
       const blob = new Blob([data], { type: "application/octet-stream" });
 
       return blob;
     }
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function deleteProject(uid, projectId) {
+  try {
+    await client.delete(`/users/${uid}/projects/${projectId}`);
   } catch (error) {
     throw error;
   }

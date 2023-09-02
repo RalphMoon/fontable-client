@@ -1,7 +1,10 @@
+import { createPortal } from "react-dom";
 import styled from "@emotion/styled";
 
 function Modal({ onModalClick, appearance, children }) {
-  return (
+  const portalRoot = document.getElementById("portal-root");
+
+  return createPortal(
     <Overlay onClick={onModalClick}>
       <StyledModal
         onClick={(ev) => ev.stopPropagation()}
@@ -9,7 +12,8 @@ function Modal({ onModalClick, appearance, children }) {
       >
         {children}
       </StyledModal>
-    </Overlay>
+    </Overlay>,
+    portalRoot
   );
 }
 

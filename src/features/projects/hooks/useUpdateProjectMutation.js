@@ -10,8 +10,8 @@ function useUpdateProjectMutation() {
   const userId = currentUser?.uid;
 
   const mutation = useMutation({
-    mutationFn: ({ unicodePaths, fontType }) =>
-      updateProject(userId, pathname, unicodePaths, fontType),
+    mutationFn: ({ char, fontType }) =>
+      updateProject(userId, pathname, char, fontType),
   });
 
   return mutation;
