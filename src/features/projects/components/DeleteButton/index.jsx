@@ -50,7 +50,10 @@ function DeleteButton({ projectName, projectId }) {
         />
       </Button>
       {isOpen && (
-        <Modal onModalClick={closeModal}>
+        <Modal
+          onModalClick={closeModal}
+          appearance={{ backgroundColor: "#fff" }}
+        >
           <div css={{ padding: "20px" }}>
             Are you sure you want to delete <strong>{projectName}</strong>?
             <div css={{ display: "flex" }}>

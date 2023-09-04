@@ -28,6 +28,7 @@ function CharacterWritingPad() {
         position: "relative",
         width: "400px",
         height: "800px",
+          backgroundColor: "#fff",
       }}
     >
       <WritingLine width="400" height="800" lines={lines} />

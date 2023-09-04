@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { createPortal } from "react-dom";
 
 import Button from "../../../../components/shared/Button";
 import Modal from "../../../../components/shared/Modal";
@@ -13,7 +12,6 @@ function ProjectCreation() {
   const { mutate } = useCreateProjectMutation();
   const [ fontFamilyName, setFontFamilyName ] = useState("");
   const [ isOpen, setIsOpen ] = useState(false);
-  const portalRoot = document.getElementById("portal-root");
 
   function openModal() {
     setIsOpen(true);
@@ -54,26 +52,27 @@ function ProjectCreation() {
           create a project
         </h1>
       </Button>
-      {isOpen &&
-        createPortal(
-          <Modal onModalClick={closeModal}>
-            <Form onFormSubmit={handleSubmit}>
-              <input
-                type="text"
-                value={fontFamilyName}
-                onChange={(ev) => setFontFamilyName(ev.target.value)}
-                placeholder="Test Sans"
-              />
-              <Button
-                type="submit"
-                appearance={{ width: "100%", backgroundColor: "#fff" }}
-              >
-                <strong>create</strong>
-              </Button>
-            </Form>
-          </Modal>,
-          portalRoot
-        )}
+      {isOpen && (
+        <Modal
+          onModalClick={closeModal}
+          appearance={{ backgroundColor: "#fff" }}
+        >
+          <Form onFormSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={fontFamilyName}
+              onChange={(ev) => setFontFamilyName(ev.target.value)}
+              placeholder="Test Sans"
+            />
+            <Button
+              type="submit"
+              appearance={{ width: "100%", backgroundColor: "#fff" }}
+            >
+              <strong>create</strong>
+            </Button>
+          </Form>
+        </Modal>
+      )}
     </div>
   );
 }

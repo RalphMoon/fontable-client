@@ -31,7 +31,6 @@ const Overlay = styled.div`
 
 const StyledModal = styled.div(
   {
-    backgroundColor: "#fff",
     borderRadius: "2px",
   },
   ({ appearance }) => appearance
