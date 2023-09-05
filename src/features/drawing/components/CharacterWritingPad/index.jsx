@@ -1,12 +1,12 @@
 import { useAtom } from "jotai";
-
 import { useTheme } from "@emotion/react";
+
 import WritingLine from "../WritingLine";
+import EraseButton from "../EraseButton";
 
 import useDrawing from "../../hooks/useDrawing";
 import { charAtom } from "../../../../lib/jotai";
 import { svgStyle } from "../../../../lib/emotion";
-import EraseButton from "../EraseButton";
 
 function CharacterWritingPad() {
   const {
