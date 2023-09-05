@@ -30,12 +30,10 @@ function ProjectCreation() {
   }
 
   return (
-    <div>
+    <div css={{ paddingLeft: "110px" }}>
       <Button
         onButtonClick={openModal}
         appearance={{
-          margin: 0,
-          padding: 0,
           color: "#222",
           backgroundColor: "transparent",
           boxShadow: "none",

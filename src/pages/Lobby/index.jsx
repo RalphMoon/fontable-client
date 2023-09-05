@@ -6,7 +6,7 @@ function Lobby() {
   return (
     <>
       <Header />
-      <main css={{ padding: "50px" }}>
+      <main>
         <ProjectCreation />
         <ProjectList />
       </main>
