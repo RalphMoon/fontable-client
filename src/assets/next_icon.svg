@@ -1,24 +1,8 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
- "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
- preserveAspectRatio="xMidYMid meet">
-
-<g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-fill="#000000" stroke="none">
-<path d="M2321 5110 c-497 -48 -990 -251 -1376 -565 -114 -92 -294 -274 -384
--387 -229 -287 -417 -675 -495 -1023 -49 -218 -60 -325 -60 -575 0 -250 11
--357 60 -575 79 -355 272 -749 509 -1040 92 -114 274 -294 387 -384 287 -229
-675 -417 1023 -495 218 -49 325 -60 575 -60 250 0 357 11 575 60 261 58 603
-204 828 353 389 259 688 599 893 1016 125 255 196 484 241 775 24 161 24 539
-0 700 -45 291 -116 520 -241 775 -134 272 -283 480 -498 692 -211 209 -404
-346 -673 478 -252 124 -486 197 -765 240 -126 19 -468 27 -599 15z m568 -1357
-c48 -22 1045 -1014 1073 -1068 13 -24 23 -67 26 -108 9 -127 29 -102 -540
--673 -366 -367 -523 -518 -557 -535 -64 -32 -168 -32 -231 0 -58 30 -106 75
--133 126 -31 58 -31 193 0 250 12 22 132 150 267 285 l246 245 -852 5 c-951 6
--884 0 -968 77 -121 108 -121 298 0 406 84 77 17 71 968 77 l852 5 -246 245
-c-135 135 -255 263 -267 285 -31 57 -31 192 0 250 37 69 110 126 188 146 41
-11 131 2 174 -18z"/>
-</g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+ <g fill="#2e3436">
+  <path d="M6.707 2.293L5.293 3.707 9.586 8l-4.293 4.293 1.414 1.414L12.414 8z" font-family="sans-serif" font-weight="400" overflow="visible" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;isolation:auto;mix-blend-mode:normal;shape-padding:0;text-decoration-color:#000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+  <path d="M6 13H5v1h1zM6 2H5v1h1z" overflow="visible"/>
+  <path d="M6 2c-.554 0-1 .446-1 1s.446 1 1 1 1-.446 1-1-.446-1-1-1zm0 10c-.554 0-1 .446-1 1s.446 1 1 1 1-.446 1-1-.446-1-1-1z" overflow="visible"/>
+ </g>
 </svg>
