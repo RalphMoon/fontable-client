@@ -22,6 +22,10 @@ export const global = css`
     list-style: none;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   @keyframes spin {
     from {
       transform: rotate(0deg);
@@ -44,12 +48,13 @@ export const theme = {
   shadows: {
     frame:
       "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+    list: "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+    button:
+      "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
   },
-  glyph: {
-    box: {
-      width: "400px",
-      height: "800px",
-    },
+  glyphBox: {
+    width: 150,
+    height: 200,
   },
 };
 
