@@ -1,6 +1,8 @@
-import { useAtomValue } from "jotai";
+import { useAtom } from "jotai";
+import { useTheme } from "@emotion/react";
 
 import WritingLine from "../WritingLine";
+import EraseButton from "../EraseButton";
 
 import useDrawing from "../../hooks/useDrawing";
 import { charAtom } from "../../../../lib/jotai";
@@ -16,48 +18,70 @@ function CharacterWritingPad() {
     isDrawing,
     currentPath,
   } = useDrawing();
-  const { pathString } = useAtomValue(charAtom);
-  const lines = Array.from({ length: 39 }, (_, index) => ({
+  const [ char, setChar ] = useAtom(charAtom);
+  const { glyphBox } = useTheme();
+  const lines = Array.from({ length: 9 }, (_, index) => ({
     y: index * 20 + 20,
-    stroke: index === 2 || index === 11 ? "#EF5350" : "#D9D9D9",
+    stroke: "#D9D9D9",
   }));
 
+  function erasePath() {
+    setChar("");
+  }
+
   return (
-    <div
-      css={{
-        position: "relative",
-        width: "400px",
-        height: "800px",
+    <div>
+      <h1 css={{ color: "#fff", textAlign: "center" }}>
+        {String.fromCharCode(char.unicode)}
+      </h1>
+      <div
+        css={{
+          position: "relative",
+          width: `${glyphBox.width}px`,
+          height: `${glyphBox.height}px`,
           backgroundColor: "#fff",
-      }}
-    >
-      <WritingLine width="400" height="800" lines={lines} />
-      <svg
-        ref={svgRef}
-        width="400"
-        height="800"
-        viewBox="0 0 400 800"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        onMouseDown={startDrawing}
-        onMouseMove={draw}
-        onMouseUp={stopDrawing}
-        onTouchStart={startDrawing}
-        onTouchMove={draw}
-        onTouchEnd={stopDrawing}
-        onTouchCancel={stopDrawing}
-        css={svgStyle}
+        }}
       >
-        <path d={pathString} stroke="black" strokeWidth="4" fill="none" />
-        {isDrawing && (
+        <WritingLine
+          width={glyphBox.width}
+          height={glyphBox.height}
+          lines={lines}
+        />
+        <svg
+          ref={svgRef}
+          width={glyphBox.width}
+          height={glyphBox.height}
+          viewBox={`0 0 ${glyphBox.width} ${glyphBox.height}`}
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          onMouseDown={startDrawing}
+          onMouseMove={draw}
+          onMouseUp={stopDrawing}
+          onTouchStart={startDrawing}
+          onTouchMove={draw}
+          onTouchEnd={stopDrawing}
+          onTouchCancel={stopDrawing}
+          css={svgStyle}
+        >
           <path
-            d={formulatePathString(currentPath)}
+            d={char.pathString}
             stroke="black"
             strokeWidth="4"
             fill="none"
           />
-        )}
-      </svg>
+          {isDrawing && (
+            <path
+              d={formulatePathString(currentPath)}
+              stroke="black"
+              strokeWidth="4"
+              fill="none"
+            />
+          )}
+        </svg>
+      </div>
+      <div>
+        <EraseButton erasePath={erasePath} />
+      </div>
     </div>
   );
 }

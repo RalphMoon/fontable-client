@@ -1,5 +1,3 @@
-import { Buffer } from "buffer";
-
 export const serializedBufferToUrl = (serializedBuffer) => {
   try {
     const uint8Array = new Uint8Array(serializedBuffer?.data);

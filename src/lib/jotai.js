@@ -64,15 +64,29 @@ export const currentCharsAtom = atom((get) => {
   return currentChars ?? [];
 });
 
-export const charAtom = atom((get) => {
-  const chars = get(currentCharsAtom);
-  const unicode = get(unicodeAtom);
-  const char = chars.find((alphabet) => alphabet.unicode === unicode) ?? {};
+export const charAtom = atom(
+  (get) => {
+    const chars = get(currentCharsAtom);
+    const unicode = get(unicodeAtom);
+    const char =
+      chars.find((currentChar) => currentChar.unicode === unicode) ?? {};
 
-  return char;
-});
+    return char;
+  },
+  (get, set, newPath) => {
+    const chars = get(currentCharsAtom);
+    const unicode = get(unicodeAtom);
+    const index = chars.findIndex((char) => char.unicode === unicode);
 
-export const replacePathsAtom = atom(null, (get, set, newPaths) => {
+    if (index === -1) return;
+
+    newPath
+      ? (chars[index].pathString += newPath)
+      : (chars[index].pathString = "");
+  }
+);
+
+export const replacePathAtom = atom(null, (get, _set, newPaths) => {
   const chars = get(currentCharsAtom);
   const unicode = get(unicodeAtom);
   const index = chars.findIndex((char) => char.unicode === unicode);
@@ -80,7 +94,16 @@ export const replacePathsAtom = atom(null, (get, set, newPaths) => {
   if (index === -1) return;
 
   chars[index].pathString += newPaths;
-  set(currentCharsAtom, chars);
+});
+
+export const removePathAtom = atom(null, (get) => {
+  const chars = get(currentCharsAtom);
+  const unicode = get(unicodeAtom);
+  const index = chars.findIndex((char) => char.unicode === unicode);
+
+  if (index === -1) return;
+
+  chars[index].pathString = "";
 });
 
 export const sentenceDomAtom = atom(null);

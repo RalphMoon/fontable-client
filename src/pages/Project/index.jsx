@@ -62,7 +62,10 @@ function Project() {
         </Modal>
       )}
       {isOpen && modalMode === "export" && (
-        <Modal onModalClick={closeModal} appearance={{ width: "300px" }}>
+        <Modal
+          onModalClick={closeModal}
+          appearance={{ width: "300px", backgroundColor: "#fff" }}
+        >
           <ExportMenu fontFamilyName={project.name} />
         </Modal>
       )}

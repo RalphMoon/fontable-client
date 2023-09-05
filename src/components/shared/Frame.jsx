@@ -19,9 +19,9 @@ const Wrapper = styled.div`
 `;
 
 const StyledFrame = styled.div`
-  width: 7vw;
-  height: 13vh;
-  margin: 0;
+  width: 6vw;
+  height: 12vh;
+  padding: 5px;
   box-shadow: ${({ theme }) => theme.shadows.frame};
   cursor: pointer;
 `;

@@ -1,14 +1,17 @@
+import { useTheme } from "@emotion/react";
+
 import useDrawing from "../../hooks/useDrawing";
 
 function ThumbnailPad({ path }) {
   const { svgRef } = useDrawing();
+  const { glyphBox } = useTheme();
 
   return (
     <svg
       ref={svgRef}
-      width="400"
-      height="800"
-      viewBox="0 0 400 800"
+      width={glyphBox.width}
+      height={glyphBox.height}
+      viewBox={`0 0 ${glyphBox.width} ${glyphBox.height}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       css={{ width: "100%", height: "100%" }}
