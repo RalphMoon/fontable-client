@@ -26,7 +26,7 @@ function CharacterWritingPad() {
   }));
 
   function erasePath() {
-    setChar("");
+    setChar(null);
   }
 
   return (
@@ -63,12 +63,15 @@ function CharacterWritingPad() {
           onTouchCancel={stopDrawing}
           css={svgStyle}
         >
-          <path
-            d={char.pathString}
-            stroke="black"
-            strokeWidth="4"
-            fill="none"
-          />
+          {char.paths.map((path, index) => (
+            <path
+              key={formulatePathString(path) + index}
+              d={formulatePathString(path)}
+              stroke="black"
+              strokeWidth="4"
+              fill="none"
+            />
+          ))}
           {isDrawing && (
             <path
               d={formulatePathString(currentPath)}

@@ -1,12 +1,12 @@
 import { useSetAtom } from "jotai";
 import { useRef, useState } from "react";
-import { replacePathsAtom } from "../../../lib/jotai";
+import { charAtom } from "../../../lib/jotai";
 
 function useDrawing() {
   const svgRef = useRef(null);
   const [ isDrawing, setIsDrawing ] = useState(false);
   const [ currentPath, setCurrentPath ] = useState([]);
-  const setPaths = useSetAtom(replacePathsAtom);
+  const setPaths = useSetAtom(charAtom);
 
   function getRelativePosition(ev) {
     const rect = svgRef.current.getBoundingClientRect();
@@ -18,6 +18,10 @@ function useDrawing() {
   }
 
   function formulatePathString(path) {
+    if (!path[0]) {
+      return;
+    }
+
     const [ start, ...rest ] = path;
     const startPointCommand = `M ${start.join(" ")}`;
 
@@ -59,7 +63,7 @@ function useDrawing() {
 
   function stopDrawing() {
     if (isDrawing) {
-      setPaths(formulatePathString(currentPath));
+      setPaths(currentPath);
       setCurrentPath(null);
       setIsDrawing(false);
     }
