@@ -1,7 +1,6 @@
 import { ErrorBoundary } from "react-error-boundary";
 
 import GoogleButton from "../../features/authentication/components/GoogleButton";
-import FacebookButton from "../../features/authentication/components/FacebookButton";
 import ErrorFallback from "../../components/Error/ErrorFallback";
 
 function Login() {
@@ -34,7 +33,6 @@ function Login() {
           <div css={{ display: "grid", marginTop: "70px" }}>
             <ErrorBoundary FallbackComponent={ErrorFallback}>
               <GoogleButton />
-              <FacebookButton />
             </ErrorBoundary>
           </div>
         </div>
